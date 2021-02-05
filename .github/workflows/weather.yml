@@ -41,7 +41,11 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: WeChat Notification
         if: steps.weather.outputs.status == 'success' && !cancelled()
-        run: curl https://sc.ftqq.com/${{ secrets.SERVERCHAN }}.send?text=天气?desp=${{env.WEATHER}}
+        uses: yakumioto/serverchan-action@v1
+        with:
+          key: ${{secrets.SERVERCHAN}}
+          text: 天气
+          desp: ${{env.WEATHER}}
 
       # Runs a set of commands using the runners shell
       - name: Delete Workflow Runs
